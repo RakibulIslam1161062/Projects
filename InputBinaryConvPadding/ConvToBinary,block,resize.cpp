@@ -6,6 +6,81 @@
 
 using namespace std;
 
+unsigned long ROTR(unsigned long words,int n)
+{
+	unsigned long res;
+	
+	res=((words << n) | (words >> (sizeof(words) - n)));
+	return res;
+}
+
+
+unsigned long SHR(unsigned long x,int n)
+{
+	unsigned long  c=(x) >> n;
+	return c;
+}
+
+unsigned long SIGMA0(unsigned long x)
+{
+	unsigned long a,b,c,d;
+	a=ROTR(x,2);
+	b=ROTR(x,13);
+	c=ROTR(x,22);
+	d=(a)^(b)^(c);
+	
+	return d;
+}
+
+unsigned long SIGMA1(unsigned long x)
+{
+	unsigned long a,b,c,d;
+	a=ROTR(x,6);
+	b=ROTR(x,11);
+	c=ROTR(x,25);
+	d=(a)^(b)^(c);
+	
+	return d;
+}
+
+
+unsigned long CH(unsigned long x, unsigned long y, unsigned long z)
+{
+	unsigned long res;
+	res=((x)& (y)) ^ ((~x)& (z));
+	
+	return res;
+}
+
+
+unsigned long MAJ(unsigned long x,unsigned long y,unsigned long z)
+{
+	unsigned long res;
+	res=((x) & (y)) ^ ((x)& (z)) ^ ((y) & (z));
+	
+	return res;
+}
+
+unsigned long EPS0(unsigned long x)
+{
+	unsigned long a,b,c,d;
+	a=ROTR(x,7);
+	b=ROTR(x,18);
+	c=SHR(x,3);
+	d=(a)^(b)^(c);
+	return d;
+}
+
+unsigned long EPS1(unsigned long x)
+{
+	unsigned long a,b,c,d;
+	a=ROTR(x,17);
+	b=ROTR(x,19);
+	c=SHR(x,10);
+	d=(a)^(b)^(c);
+	return d;
+}
+
 vector< unsigned long> convertToBinary(string msg)
 {
 	vector<unsigned long> converted;
@@ -17,6 +92,7 @@ vector< unsigned long> convertToBinary(string msg)
 	}
 	return converted;
 }
+
 
 vector<unsigned long> paddingZeros(vector<unsigned long> block)
 {
@@ -46,6 +122,7 @@ vector<unsigned long> paddingZeros(vector<unsigned long> block)
 	
 	
 }
+
 
 int main()
 {
