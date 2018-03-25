@@ -123,6 +123,25 @@ vector<unsigned long> paddingZeros(vector<unsigned long> block)
 	
 }
 
+vector<unsigned long> resizeInto16Blocks(vector<unsigned long>message)
+{
+	vector<unsigned long>resizedMsgBlock(16);
+	
+	
+	for(int i=0;i<64;i=i+4)
+	{
+		bitset<32> temp(0);
+		
+		temp=(unsigned long)message[i]<< 24;
+		temp|=message[i+1]<< 16;
+		temp|=message[i+2]<< 8;
+		temp|=message[i+3];
+		
+		resizedMsgBlock[i/4]=temp.to_ulong();
+	}
+	
+	return resizedMsgBlock;
+}
 
 int main()
 {
@@ -142,5 +161,6 @@ int main()
 	
 	cout<<padded.size();
 	//cout<<0x10000000;
+	resized=resizeInto16Blocks(padded);
 	
 }
