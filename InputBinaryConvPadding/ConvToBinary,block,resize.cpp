@@ -144,6 +144,19 @@ vector<unsigned long> resizeInto16Blocks(vector<unsigned long>message)
 	return resizedMsgBlock;
 }
 
+string show_as_hex(unsigned long input)
+{
+	bitset<32> bs(input);
+	unsigned n = bs.to_ulong();
+
+	stringstream sstream;
+	sstream << std::hex << std::setw(8) << std::setfill('0') << n;
+	string temp;
+	sstream >> temp;
+
+	return temp;
+}
+
 
 
 string computeTheHashValue(vector<unsigned long>msg)
